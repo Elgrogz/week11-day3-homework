@@ -18,9 +18,10 @@ var populateList = function(albumsToPrint) {
 }
 
 var getAlbumsByArtist = function() {
+  var search = document.querySelector('#search-query').value;
   var filteredAlbums = albums.filter(function (album) {
     console.log(this.value);
-    return (album.artists[0].name === this.value);
+    return (album.artists[0].name === search);
   }.bind(this));
   console.log(filteredAlbums);
   populateList(filteredAlbums);
@@ -38,8 +39,12 @@ var app = function(){
   var url = 'https://api.spotify.com/v1/search?q=christmas&type=album';
   makeRequest(url, requestComplete);
 
+
   var searchQuery = document.querySelector('#search');
   searchQuery.onclick = getAlbumsByArtist;
+
+  var back = document.querySelector('#back');
+  back.onclick = populateList;
 }
 
 window.onload = app;
